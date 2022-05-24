@@ -43,7 +43,6 @@ public class SingleLinkedList {
         length++;
     }
 
-
     public void displayList() {
         if(head == null) {
             System.out.println("Linked List Empty");
