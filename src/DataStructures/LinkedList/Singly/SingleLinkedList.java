@@ -79,7 +79,7 @@ public class SingleLinkedList {
             prePend(value);
             return;
         }
-        if(index > length) { // if given index is greater than size of list
+        if(index >= length) { // if given index is greater than size of list
             append(value);
             return;
         }
@@ -145,15 +145,17 @@ public class SingleLinkedList {
         myList.insert(3, 4);
         myList.displayList(); // 1->2->3->4->5
 
-        myList.insert(0, 0);
-        myList.displayList(); // 0->1->2->3->4->5
+        myList.insert(0, 0); // insert head
+        myList.insert(6, 6); // insert tail
+        myList.displayList(); // 0->1->2->3->4->5->6
 
         myList.remove(0); // remove head
-        myList.remove(4); // remove tail
-        myList.displayList();  // 1->2->3->4
+        myList.remove(5); // remove tail
+        myList.displayList();  // 1->2->3->4-5
         System.out.println(myList); // check head and tail are updated after above operations
         System.out.println("Size of list is " + myList.length);
 
+        myList.remove(4);
         myList.remove(3);
         myList.remove(2);
         myList.remove(1);

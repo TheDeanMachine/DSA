@@ -87,15 +87,19 @@ public class DoubleLinkedList {
             prePend(value);
             return;
         }
-        if(index > length) { // edge case
+        if(index >= length) { // edge case
             append(value);
             return;
         }
 
+        // get pointers
         Node currentNode = traverseToIndex(index); // get the node corresponding to the index
         Node previousNode = currentNode.getPrevious(); // get previous node
-        Node newNode = new Node(value, currentNode, previousNode); // create a new node and point its "next" pointer to the "currentNode"
-        previousNode.setNext(newNode); // set the previous node to the inserted new node
+
+        // insert the node and update pointers
+        Node newNode = new Node(value, currentNode, previousNode); // point "newNode"s "next" and "previous" pointers
+        previousNode.setNext(newNode); // update previous node next to "newNode"
+        currentNode.setPrevious(newNode); // update current node previous to "newNode"
         length++;
     }
 
@@ -124,10 +128,18 @@ public class DoubleLinkedList {
         Node nextNode = currentNode.getNext();
 
         // remove the current/index node
-        previousNode.setNext(nextNode);
-        nextNode.setPrevious(previousNode);
-        currentNode.setNext(null);
-        currentNode.setPrevious(null);
+        if(nextNode == null) { // if tail node
+            previousNode.setNext(nextNode);
+            currentNode.setNext(null);
+            currentNode.setPrevious(null);
+            tail = previousNode; // update tail
+        } else {
+            previousNode.setNext(nextNode);
+            nextNode.setPrevious(previousNode);
+            currentNode.setNext(null);
+            currentNode.setPrevious(null);
+
+        }
         length--;
     }
 
@@ -149,19 +161,24 @@ public class DoubleLinkedList {
         myList.displayList(); // 1->2->3
 
         myList.append(5);
-        myList.displayList();
         myList.insert(3, 4);
         myList.displayList(); // 1->2->3->4->5
-        myList.insert(0, 0);
-        myList.displayList(); // 0->1->2->3->4->5
+
+        myList.insert(0, 0); // insert head
+        myList.insert(6, 6); // insert tail
+        myList.displayList(); // 0->1->2->3->4->5->6
 
         myList.remove(0); // remove head
-        myList.remove(4); // remove tail
-        System.out.println(myList); // show head and tail value
+        myList.remove(5); // remove tail
+        myList.displayList();  // 1->2->3->4-5
+        System.out.println(myList); // check head and tail are updated after above operations
+        System.out.println("Size of list is " + myList.length);
+
+        myList.remove(4);
         myList.remove(3);
         myList.remove(2);
         myList.remove(1);
-        myList.remove(0);
+        myList.remove(0); // remove last node
         myList.displayList();
     }
 
