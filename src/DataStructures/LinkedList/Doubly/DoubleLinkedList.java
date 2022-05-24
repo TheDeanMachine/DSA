@@ -68,6 +68,33 @@ public class DoubleLinkedList {
         System.out.println();
     }
 
+    public void insert(int index, int value) {
+
+        if( (head == null) || (index == 0) ) { // edge case
+            prePend(value);
+            return;
+        }
+        if(index > length) { // edge case
+            append(value);
+            return;
+        }
+
+        Node currentNode = traverseToIndex(index); // get the node corresponding to the index
+        Node previousNode = currentNode.getPrevious(); // get previous node
+        Node newNode = new Node(value, currentNode, previousNode); // create a new node and point its "next" pointer to the "currentNode"
+        previousNode.setNext(newNode); // set the previous node to the inserted new node
+        length++;
+    }
+
+    // gets the node corresponding to index
+    public Node traverseToIndex(int index) {
+        Node currentNode = head;
+        for (int i = 0; i < index; i++) {
+            currentNode = currentNode.getNext();
+        }
+        return currentNode;
+    }
+
 
     public static void main(String[] args) {
         DoubleLinkedList myList = new DoubleLinkedList();
@@ -75,6 +102,13 @@ public class DoubleLinkedList {
         myList.prePend(1);
         myList.append(3);
         myList.displayList(); // 1->2->3
+
+        myList.append(5);
+        myList.displayList();
+        myList.insert(3, 4);
+        myList.displayList(); // 1->2->3->4->5
+        myList.insert(0, 0);
+        myList.displayList(); // 0->1->2->3->4->5
     }
 
 }

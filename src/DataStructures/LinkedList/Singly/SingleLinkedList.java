@@ -62,7 +62,7 @@ public class SingleLinkedList {
 
     public void insert(int index, int value) {
 
-        if(head == null) { // if list is empty
+        if( (head == null) || (index == 0) ) { // if list is empty or index 0
             prePend(value);
             return;
         }
@@ -126,8 +126,11 @@ public class SingleLinkedList {
         myList.displayList();
         myList.insert(3, 4);
         myList.displayList(); // 1->2->3->4->5
+        myList.insert(0, 0);
+        myList.displayList();
 
         myList.remove(0);
+        myList.remove(4);
         myList.remove(3);
         myList.remove(2);
         myList.remove(1);
