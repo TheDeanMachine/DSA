@@ -86,6 +86,36 @@ public class DoubleLinkedList {
         length++;
     }
 
+    public void remove(int index) {
+        // remove last node from list to make list empty
+        if (length == 1) {
+            head = null;
+            tail = null;
+            return;
+        }
+
+        // remove head
+        if (index == 0) {
+            Node nextNode = head.getNext();
+            head.setNext(null);
+            nextNode.setPrevious(null);
+            head = nextNode;
+            return;
+        }
+
+        // get pointers to the nodes
+        Node currentNode = traverseToIndex(index);
+        Node previousNode = currentNode.getPrevious();
+        Node nextNode = currentNode.getNext();
+
+        // remove the current/index node
+        previousNode.setNext(nextNode);
+        nextNode.setPrevious(previousNode);
+        currentNode.setNext(null);
+        currentNode.setPrevious(null);
+
+    }
+
     // gets the node corresponding to index
     public Node traverseToIndex(int index) {
         Node currentNode = head;
@@ -109,6 +139,14 @@ public class DoubleLinkedList {
         myList.displayList(); // 1->2->3->4->5
         myList.insert(0, 0);
         myList.displayList(); // 0->1->2->3->4->5
+
+        myList.remove(0);
+        myList.remove(4);
+        myList.remove(3);
+        myList.remove(2);
+        myList.remove(1);
+        myList.remove(0);
+        myList.displayList();
     }
 
 }

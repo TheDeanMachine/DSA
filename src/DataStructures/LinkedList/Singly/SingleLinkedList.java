@@ -19,6 +19,14 @@ public class SingleLinkedList {
         length++;
     }
 
+    public int getHead() {
+        return head.getValue();
+    }
+
+    public int getTail() {
+        return tail.getValue();
+    }
+
     public void append(int value) {
         if (head == null) { // if list is empty
             head = new Node(value);
