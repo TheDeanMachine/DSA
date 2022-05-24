@@ -27,6 +27,11 @@ public class SingleLinkedList {
         return tail.getValue();
     }
 
+    @Override
+    public String toString() {
+        return "SingleLinkedList {" + " head = " + getHead() + ", tail = " + getTail() + " }";
+    }
+
     public void append(int value) {
         if (head == null) { // if list is empty
             head = new Node(value);
@@ -91,6 +96,7 @@ public class SingleLinkedList {
         if (length == 1) {
             head = null;
             tail = null;
+            length--;
             return;
         }
 
@@ -99,18 +105,23 @@ public class SingleLinkedList {
             Node nextNode = head.getNext();
             head.setNext(null);
             head = nextNode;
+            length--;
             return;
         }
 
-        // remove node
+        // get pointers
         Node previousNode = traverseToIndex(index - 1); // get previous node
         Node currentNode = previousNode.getNext(); // get the node corresponding to the index
         Node nextNode = currentNode.getNext(); // get the next node
 
+        // remove node
         previousNode.setNext(nextNode);
         currentNode.setNext(null);
         length--;
 
+        if(nextNode == null) { // if tail node
+            tail = previousNode; // update tail
+        }
     }
 
     // gets the node corresponding to index
@@ -131,18 +142,19 @@ public class SingleLinkedList {
         myList.displayList(); // 1->2->3
 
         myList.append(5);
-        myList.displayList();
         myList.insert(3, 4);
         myList.displayList(); // 1->2->3->4->5
         myList.insert(0, 0);
-        myList.displayList();
+        myList.displayList(); // 0->1->2->3->4->5
 
-        myList.remove(0);
-        myList.remove(4);
+        myList.remove(0); // remove head
+        myList.remove(4); // remove tail
+        myList.displayList();
+        System.out.println(myList); // check head and tail are updated after above operations
         myList.remove(3);
         myList.remove(2);
         myList.remove(1);
-        myList.remove(0);
+        myList.remove(0); // remove last node
         myList.displayList();
 
     }

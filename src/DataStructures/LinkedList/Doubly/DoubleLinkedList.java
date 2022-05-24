@@ -20,6 +20,19 @@ public class DoubleLinkedList {
         length++;
     }
 
+    public int getHead() {
+        return head.getValue();
+    }
+
+    public int getTail() {
+        return tail.getValue();
+    }
+
+    @Override
+    public String toString() {
+        return "DoubleLinkedList {" + " head = " + getHead() + ", tail = " + getTail() + " }";
+    }
+
     public void append(int value) {
         // create a new node with no pointers
         Node newNode = new Node(value);
@@ -91,6 +104,7 @@ public class DoubleLinkedList {
         if (length == 1) {
             head = null;
             tail = null;
+            length--;
             return;
         }
 
@@ -100,6 +114,7 @@ public class DoubleLinkedList {
             head.setNext(null);
             nextNode.setPrevious(null);
             head = nextNode;
+            length--;
             return;
         }
 
@@ -113,7 +128,7 @@ public class DoubleLinkedList {
         nextNode.setPrevious(previousNode);
         currentNode.setNext(null);
         currentNode.setPrevious(null);
-
+        length--;
     }
 
     // gets the node corresponding to index
@@ -140,8 +155,9 @@ public class DoubleLinkedList {
         myList.insert(0, 0);
         myList.displayList(); // 0->1->2->3->4->5
 
-        myList.remove(0);
-        myList.remove(4);
+        myList.remove(0); // remove head
+        myList.remove(4); // remove tail
+        System.out.println(myList); // show head and tail value
         myList.remove(3);
         myList.remove(2);
         myList.remove(1);
