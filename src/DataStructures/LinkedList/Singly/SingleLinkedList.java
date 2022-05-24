@@ -60,8 +60,6 @@ public class SingleLinkedList {
         System.out.println();
     }
 
-
-
     public void insert(int index, int value) {
 
         if(head == null) { // if list is empty
@@ -85,6 +83,14 @@ public class SingleLinkedList {
         if (length == 1) {
             head = null;
             tail = null;
+            return;
+        }
+
+        // remove head
+        if ( index == 0 ) {
+            Node nextNode = head.getNext();
+            head.setNext(null);
+            head = nextNode;
             return;
         }
 
@@ -121,7 +127,7 @@ public class SingleLinkedList {
         myList.insert(3, 4);
         myList.displayList(); // 1->2->3->4->5
 
-        myList.remove(4);
+        myList.remove(0);
         myList.remove(3);
         myList.remove(2);
         myList.remove(1);
