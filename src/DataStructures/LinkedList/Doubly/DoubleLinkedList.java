@@ -48,7 +48,7 @@ public class DoubleLinkedList {
         length++;
     }
 
-    public void prePend(int value){
+    public void prepend(int value){
         // create a new node with no pointers
         Node newNode = new Node(value);
 
@@ -84,7 +84,7 @@ public class DoubleLinkedList {
     public void insert(int index, int value) {
 
         if( (head == null) || (index == 0) ) { // edge case
-            prePend(value);
+            prepend(value);
             return;
         }
         if(index >= length) { // edge case
@@ -138,7 +138,6 @@ public class DoubleLinkedList {
             nextNode.setPrevious(previousNode);
             currentNode.setNext(null);
             currentNode.setPrevious(null);
-
         }
         length--;
     }
@@ -156,12 +155,12 @@ public class DoubleLinkedList {
     public static void main(String[] args) {
         DoubleLinkedList myList = new DoubleLinkedList();
         myList.append(2);
-        myList.prePend(1);
+        myList.prepend(1);
         myList.append(3);
         myList.displayList(); // 1->2->3
 
         myList.append(5);
-        myList.insert(3, 4);
+        myList.insert(3, 4); // insert test
         myList.displayList(); // 1->2->3->4->5
 
         myList.insert(0, 0); // insert head

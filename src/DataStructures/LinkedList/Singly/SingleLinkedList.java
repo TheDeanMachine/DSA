@@ -44,7 +44,7 @@ public class SingleLinkedList {
         length++;
     }
 
-    public void prePend(int value){
+    public void prepend(int value){
         if (head == null) { // if list is empty
             head = new Node(value);
             tail = head;
@@ -75,11 +75,11 @@ public class SingleLinkedList {
 
     public void insert(int index, int value) {
 
-        if( (head == null) || (index == 0) ) { // if list is empty or index 0
-            prePend(value);
+        if( (head == null) || (index == 0) ) { // insert at start of list
+            prepend(value);
             return;
         }
-        if(index >= length) { // if given index is greater than size of list
+        if(index >= length) { // insert at end of list
             append(value);
             return;
         }
@@ -133,11 +133,51 @@ public class SingleLinkedList {
         return currentNode;
     }
 
+    // Iterative Algorithm Implementation
+    public void reverse() {
+        // get pointers
+        Node previous = null;
+        Node current = head;
+        Node next = head; // cant assume list has nodes
+
+        // loop through and reverse
+        while(current != null) {
+           next = current.getNext(); // get the first value
+           current.setNext(previous); // reverse the pointer
+           previous = current; // move pointer up
+           current = next; // move pointer up
+
+        }
+        swapHeadTailPointers();
+    }
+
+    // Recursive Algorithm Implementation
+    public Node reverseRecursive(Node head) {
+        if (head == null) {
+            return null;
+        }
+        if (head.getNext() == null) {
+            return head;
+        }
+        Node node = reverseRecursive(head.getNext());
+        head.getNext().setNext(head);
+        head.setNext(null);
+        return node;
+    }
+
+    public void swapHeadTailPointers() {
+        // reassign new head/tail values after reversals
+        Node temp;
+        temp = head;
+        head = tail;
+        tail = temp;
+    }
+
 
     public static void main(String[] args) {
         SingleLinkedList myList = new SingleLinkedList();
         myList.append(2);
-        myList.prePend(1);
+        myList.prepend(1);
         myList.append(3);
         myList.displayList(); // 1->2->3
 
@@ -153,7 +193,16 @@ public class SingleLinkedList {
         myList.remove(5); // remove tail
         myList.displayList();  // 1->2->3->4-5
         System.out.println(myList); // check head and tail are updated after above operations
-        System.out.println("Size of list is " + myList.length);
+        System.out.println("Size of list is " + myList.length); // check length
+
+        myList.reverse();
+        myList.displayList();
+        System.out.println(myList); // check head and tail are updated after above operations
+
+        myList.reverseRecursive(myList.head);
+        myList.swapHeadTailPointers();
+        myList.displayList();
+        System.out.println(myList); // check head and tail are updated after above operations
 
         myList.remove(4);
         myList.remove(3);
@@ -161,6 +210,8 @@ public class SingleLinkedList {
         myList.remove(1);
         myList.remove(0); // remove last node
         myList.displayList();
+
+
 
     }
 
