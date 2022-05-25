@@ -81,6 +81,23 @@ public class DoubleLinkedList {
         System.out.println();
     }
 
+    public void displayListInReverse() {
+        if(tail == null) {
+            System.out.println("Linked List Empty");
+            return;
+        }
+
+        Node currentNode = tail;
+        System.out.print(currentNode.getValue());
+
+        while ( currentNode.getPrevious() != null ) {
+            currentNode = currentNode.getPrevious();
+            System.out.print("->" + currentNode.getValue());
+        }
+
+        System.out.println();
+    }
+
     public void insert(int index, int value) {
 
         if( (head == null) || (index == 0) ) { // edge case
@@ -172,6 +189,7 @@ public class DoubleLinkedList {
         myList.displayList();  // 1->2->3->4-5
         System.out.println(myList); // check head and tail are updated after above operations
         System.out.println("Size of list is " + myList.length);
+        myList.displayListInReverse(); // does not modify just visits list in reverse
 
         myList.remove(4);
         myList.remove(3);
