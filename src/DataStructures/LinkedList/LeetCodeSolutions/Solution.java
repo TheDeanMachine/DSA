@@ -1,5 +1,7 @@
 package DataStructures.LinkedList.LeetCodeSolutions;
 
+import java.util.HashSet;
+
 public class Solution {
 
     public ListNode reverseList(ListNode head) {
@@ -7,7 +9,7 @@ public class Solution {
         ListNode curr = head;
         ListNode next;
 
-        while(curr!=null) {
+        while(curr != null) {
             next = curr.next;
             curr.next = prev;
             prev = curr;
@@ -38,6 +40,20 @@ public class Solution {
         return false;
     }
 
+    // using hash set
+    public boolean hasCycle2(ListNode head) {
+        HashSet<ListNode> set = new HashSet<>();
+        while(head != null){
+            if(set.contains(head)){
+                return true;
+            }
+
+            set.add(head);
+            head = head.next;
+        }
+        return false;
+    }
+
 
     /**
      * You are given the heads of two sorted linked lists list1 and list2.
@@ -54,7 +70,7 @@ public class Solution {
         }
 
         ListNode list = new ListNode();
-        ListNode head = list;
+        ListNode head = list; // return the head when done
 
         while(list1 != null && list2 != null) { // stops when either list next gets to null
             if (list1.val <= list2.val) {
@@ -78,6 +94,78 @@ public class Solution {
     }
 
 
+    /**
+     * Given the head of a linked list and an integer val,
+     * remove all the nodes of the linked list that has Node.val == val, and return the new head.
+     */
+    // modify the list in place
+    public ListNode removeElements(ListNode head, int val) {
+        if (head == null) {
+            return null;
+        }
+
+        ListNode list = new ListNode(); // point the currently empty node at the head, this allows you to remove the head node
+        list.next = head;
+        ListNode cur = list; // now points to same list as "head", but with a next pointer at the head
+
+        while (cur.next != null) {
+            if (cur.next.val == val) { // have to check against next value without a prev pointer
+                cur.next = cur.next.next; // remove the that value by skipping over it
+            } else {
+                cur = cur.next; // increment to the next node
+            }
+        }
+
+        return list.next; // have to return next as first node is placement holder
+    }
+
+    // modify the list in place, two pointers method
+    public static ListNode removeElements2(ListNode head, int val) {
+        if (head == null) {
+            return null;
+        }
+
+        ListNode list = new ListNode(); // point the currently empty node at the head, this allows you to remove the head node
+        list.next = head;
+        ListNode cur = head; // same as head list // 1 node ahead of list
+        ListNode prev = list; // now points to same list as "head", but with a next pointer at the head
+
+        while (cur != null) {
+            if (cur.val == val) {
+                prev.next = cur.next; // remove the that value by skipping over it
+            } else {
+                prev = cur; // increment to the next node
+            }
+            cur = cur.next; // increment to the next node
+        }
+
+        return list.next; // have to return next as first node is placement holder
+    }
+
+
+
+
+
+
+
+    public static void main(String[] args) {
+        ListNode list = new ListNode(1); // head
+        ListNode list2 = new ListNode(2);
+        ListNode list3 = new ListNode(3);
+        ListNode list4 = new ListNode(4);
+        ListNode list5 = new ListNode(5);
+        ListNode list6 = new ListNode(6);
+        ListNode list7 = new ListNode(7); // tail
+
+        list.next = list2;
+        list2.next = list3;
+        list3.next = list4;
+        list4.next = list5;
+        list5.next = list6;
+        list6.next = list7;
+        list7.next = null;
+
+    }
 
 
 }
