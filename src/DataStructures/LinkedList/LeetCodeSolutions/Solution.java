@@ -104,8 +104,8 @@ public class Solution {
             return null;
         }
 
-        ListNode list = new ListNode(); // point the currently empty node at the head, this allows you to remove the head node
-        list.next = head;
+        ListNode list = new ListNode();
+        list.next = head; // point the currently empty node at the head, this allows you to remove the head node
         ListNode cur = list; // now points to same list as "head", but with a next pointer at the head
 
         while (cur.next != null) {
@@ -125,8 +125,8 @@ public class Solution {
             return null;
         }
 
-        ListNode list = new ListNode(); // point the currently empty node at the head, this allows you to remove the head node
-        list.next = head;
+        ListNode list = new ListNode();
+        list.next = head; // point the currently empty node at the head, this allows you to remove the head node
         ListNode cur = head; // same as head list // 1 node ahead of list
         ListNode prev = list; // now points to same list as "head", but with a next pointer at the head
 
@@ -134,7 +134,7 @@ public class Solution {
             if (cur.val == val) {
                 prev.next = cur.next; // remove the that value by skipping over it
             } else {
-                prev = cur; // increment to the next node
+                prev = prev.next; // increment to the next node
             }
             cur = cur.next; // increment to the next node
         }
