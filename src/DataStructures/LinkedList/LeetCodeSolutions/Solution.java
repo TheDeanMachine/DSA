@@ -24,8 +24,9 @@ public class Solution {
      * reached again by continuously following the next pointer
      */
     public boolean hasCycle(ListNode head) {
-        if (head == null || head.next == null)
+        if (head == null || head.next == null) {
             return false;
+        }
 
         ListNode slow = head;
         ListNode fast = head;

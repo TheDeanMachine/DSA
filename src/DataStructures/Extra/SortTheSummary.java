@@ -31,11 +31,16 @@ public class SortTheSummary {
         // Now after the map is sorted, create 2-dimesional ArrayList and insert pairs of key and values into it
         List<List<Integer>> ans = new ArrayList<>(map.size());
         for (Map.Entry<Integer, Integer> curr : list) {
-            List integerList = new ArrayList<>(2);
+            List<Integer> integerList = new ArrayList<>(2);
             integerList.add(curr.getValue());
             integerList.add(curr.getKey());
             ans.add(integerList);
         }
         return ans;
+    }
+
+    public static void main(String[] args) {
+        List<Integer> tempPhoenix = Arrays.asList(100, 101, 102, 103, 104, 103, 106, 107, 108, 109, 106, 110, 106, 100, 103);
+        groupSort(tempPhoenix).forEach(System.out::println);
     }
 }

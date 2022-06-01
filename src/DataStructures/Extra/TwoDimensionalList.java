@@ -1,9 +1,6 @@
 package DataStructures.Extra;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class TwoDimensionalList {
 
@@ -58,32 +55,6 @@ public class TwoDimensionalList {
 
         int occurrences = Collections.frequency(tempPhoenix, numToCheck);
         System.out.println("Using static Collections method " + occurrences);
-
-
-
-
-
-
-        for (int i = 0; i < twoDimList.size(); i++) {
-            int innerListSize = twoDimList.get(i).size();
-
-            for (int x = 0; x < innerListSize; x++) {
-                Integer outerListIndex = i;
-                Integer innerListIndex = x;
-                Integer currentIndex = twoDimList.get(i).get(x);
-
-                // checking for occurrences of number
-                int numToCheck2 = twoDimList.get(i).get(x);
-                int occurrences2 = Collections.frequency(twoDimList.get(i), numToCheck2);
-
-
-
-                System.out.printf("Number %d occurs in list %d times", numToCheck2, occurrences2 );
-                System.out.println();
-
-            }
-        }
-
     }
 }
 
