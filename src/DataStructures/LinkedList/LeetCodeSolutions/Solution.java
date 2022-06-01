@@ -4,6 +4,15 @@ import java.util.HashSet;
 
 public class Solution {
 
+    public static void displayList(ListNode head){
+        System.out.print(head.val + "->");
+        while (head.next != null) {
+            head = head.next;
+            System.out.print(head.val + "->");
+        }
+    }
+
+    // three pointer method
     public ListNode reverseList(ListNode head) {
         ListNode prev = null;
         ListNode curr = head;
@@ -71,7 +80,7 @@ public class Solution {
         }
 
         ListNode list = new ListNode();
-        ListNode head = list; // return the head when done
+        ListNode head = list;
 
         while(list1 != null && list2 != null) { // stops when either list next gets to null
             if (list1.val <= list2.val) {
@@ -106,18 +115,18 @@ public class Solution {
         }
 
         ListNode list = new ListNode();
-        list.next = head; // point the currently empty node at the head, this allows you to remove the head node
-        ListNode cur = list; // now points to same list as "head", but with a next pointer at the head
+        list.next = head;
+        ListNode cur = list;
 
         while (cur.next != null) {
             if (cur.next.val == val) { // have to check against next value without a prev pointer
                 cur.next = cur.next.next; // remove the that value by skipping over it
             } else {
-                cur = cur.next; // increment to the next node
+                cur = cur.next;
             }
         }
 
-        return list.next; // have to return next as first node is placement holder
+        return list.next;
     }
 
     // modify the list in place, two pointers method
@@ -140,7 +149,7 @@ public class Solution {
             cur = cur.next; // increment to the next node
         }
 
-        return list.next; // have to return next as first node is placement holder
+        return list.next;
     }
 
 
@@ -162,6 +171,36 @@ public class Solution {
     }
 
 
+    /**
+     * Given the head of a linked list, remove the nth node from the end of the list and return its head.
+     */
+    public static ListNode removeNthFromEnd(ListNode head, int n) {
+
+        if (head == null || head.next == null) {
+            return null;
+        }
+
+        ListNode start = new ListNode(); // no longer modifying original list
+        start.next = head;
+        ListNode fast = start;
+        ListNode slow = start;
+
+        //
+        for(int i = 0; i < n; i++) {
+            fast = fast.next;
+        }
+
+        while(fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        slow.next = slow.next.next;
+
+        return start.next;
+
+    }
+
 
 
 
@@ -182,6 +221,9 @@ public class Solution {
         list6.next = list7;
         list7.next = null;
 
+        // test various methods
+        removeNthFromEnd(list, 2);
+        displayList(list);
     }
 
 
