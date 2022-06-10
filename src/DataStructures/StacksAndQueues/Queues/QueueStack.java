@@ -1,5 +1,7 @@
 package DataStructures.StacksAndQueues.Queues;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class QueueStack {
@@ -39,6 +41,12 @@ public class QueueStack {
         myQueue.push(2); // queue is: [1, 2] (leftmost is front of the queue)
         myQueue.peek(); // return 1
         myQueue.pop(); // return 1, queue is [2]
+
+        myQueue.push(3);
+        myQueue.push(4);
+        System.out.println(myQueue.pop()); // return 2, output is now empty, will fill "output" with "input" on next call
+        System.out.println(myQueue.pop()); // return 3
+
         myQueue.empty(); // return false
     }
 }
