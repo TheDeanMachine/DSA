@@ -12,12 +12,12 @@ public class QueueStack {
     }
 
     public void push(int x) {
-        input.push(x); // stack method peek not recursive
+        input.push(x); // stack method not recursive
     }
 
     public int pop() {
         peek();
-        return output.pop(); // stack method peek not recursive
+        return output.pop(); // stack method not recursive
     }
 
     public int peek() {
