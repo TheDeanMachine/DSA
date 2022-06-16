@@ -51,9 +51,9 @@ public class BST {
         return null;  // not found
     }
 
-    /*
-     * Adapted from: @author MightyPork
-     */
+
+    ///////////////////////////////////
+    // Adapted from: @author MightyPork
     public void print(Node root) {
         List<List<String>> lines = new ArrayList<>();
 
@@ -159,18 +159,72 @@ public class BST {
             perpiece /= 2;
         }
     }
+    ///////////////////////////////////
 
+    public void remove(int value) {
+        if(root == null) {
+            return;
+        }
+
+        // search for value
+        Node parentNode = null;
+        Node currentNode = root;
+
+        while (currentNode.getValue() != value) {
+            if (value < currentNode.getValue()) {
+                parentNode = currentNode; // keep track of parent node
+                currentNode = currentNode.getLeft(); // go down one level
+
+            } else if (value > currentNode.getValue()) {
+                parentNode = currentNode; // keep track of parent node
+                currentNode = currentNode.getRight(); // go down one level
+            }
+        }
+
+
+        while (currentNode != null) {
+            // if the value is a leaf node, delete leaf value
+            if(currentNode.getLeft() == null && currentNode.getRight() == null) {
+                if(parentNode.getLeft() == currentNode) {
+                    parentNode.setLeft(null);
+                } else {
+                    parentNode.setRight(null);
+                }
+
+            // if the value has 1 child bypass the value
+            } else if(currentNode.getLeft() != null || currentNode.getRight() != null ) {
+                if (currentNode.getLeft() == null) {
+//                    parentNode.
+                }
+
+
+            // else replace value with successor node
+            } else {
+
+
+
+            }
+
+
+
+        }
+    }
 
     public static void main(String[] args) {
         BST tree = new BST();
-        tree.insert(9);
-        tree.insert(4);
+        tree.insert(10);
+        tree.insert(5);
         tree.insert(20);
-        tree.insert(1);
+        tree.insert(3);
         tree.insert(6);
         tree.insert(15);
         tree.insert(170);
-
+        tree.insert(14);
+        tree.insert(16);
+        tree.insert(1);
+        tree.insert(4);
+        tree.insert(5);
+        tree.insert(7);
         tree.print(tree.root);
 
 

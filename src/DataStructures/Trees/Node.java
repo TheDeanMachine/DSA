@@ -38,7 +38,7 @@ public class Node {
         return value;
     }
 
-
+    // used in print method to display node value
     public String getText() {
         return String.valueOf(getValue());
     }
