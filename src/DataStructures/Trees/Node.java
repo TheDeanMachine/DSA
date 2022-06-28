@@ -38,6 +38,10 @@ public class Node {
         return value;
     }
 
+    public void setValue(int value) {
+        this.value = value;
+    }
+
     // used in print method to display node value
     public String getText() {
         return String.valueOf(getValue());

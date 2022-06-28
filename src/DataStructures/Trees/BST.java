@@ -23,13 +23,13 @@ public class BST {
                     currentNode.setLeft(new Node(value));
                     return;
                 }
-                currentNode = currentNode.getLeft(); // go down one level
+                currentNode = currentNode.getLeft(); // go down one level, find lesser value
             } else {
                 if(currentNode.getRight() == null) {
                     currentNode.setRight(new Node(value));
                     return;
                 }
-                currentNode = currentNode.getRight(); // go down one level
+                currentNode = currentNode.getRight(); // go down one level, find greater value
             }
         }
     }
@@ -50,7 +50,6 @@ public class BST {
         }
         return null;  // not found
     }
-
 
     ///////////////////////////////////
     // Adapted from: @author MightyPork
@@ -181,33 +180,63 @@ public class BST {
             }
         }
 
-
         while (currentNode != null) {
-            // if the value is a leaf node, delete leaf value
-            if(currentNode.getLeft() == null && currentNode.getRight() == null) {
-                if(parentNode.getLeft() == currentNode) {
-                    parentNode.setLeft(null);
-                } else {
-                    parentNode.setRight(null);
-                }
-
-            // if the value has 1 child bypass the value
-            } else if(currentNode.getLeft() != null || currentNode.getRight() != null ) {
+            if(currentNode.getLeft() == null && currentNode.getRight() == null) { // if the value is a leaf node, delete leaf value
+                currentNode = null;
+            } else if(currentNode.getLeft() != null) { // if the value has 1 child bypass the value
                 if (currentNode.getLeft() == null) {
-//                    parentNode.
+
+
                 }
 
+            } else { // else replace value with successor node
 
-            // else replace value with successor node
-            } else {
-
-
+                // coded myself into a corner!
 
             }
 
-
-
         }
+    }
+
+    ////////////////////////////////////////
+    // Adapted from: @author Shivani Dwivedi
+    public Node deleteNode(Node root, int key) {
+        if(root == null) return root;
+
+        if(key > root.getValue()){ // move right
+            root.setRight(deleteNode(root.getRight(), key));
+
+        } else if (key < root.getValue()){ // move left
+            root.setLeft(deleteNode(root.getLeft(), key));
+
+        } else { // found the target
+            if (root.getLeft() == null && root.getRight() == null) { // its a leaf node
+                root = null;
+            } else if (root.getRight() != null) { // has a right child
+                root.setValue(successor(root)); // my worthy successor
+                root.setRight(deleteNode(root.getRight(), root.getValue()));
+            } else {
+                root.setValue(predecessor(root));
+                root.setLeft(deleteNode(root.getLeft(), root.getValue()));
+            }
+        }
+        return root;
+    }
+
+    private int successor(Node root){
+        root = root.getRight();
+        while(root.getLeft() != null){
+            root = root.getLeft();
+        }
+        return root.getValue();
+    }
+
+    private int predecessor(Node root){
+        root = root.getLeft();
+        while(root.getRight() != null){
+            root = root.getRight();
+        }
+        return root.getValue();
     }
 
     public static void main(String[] args) {
@@ -227,6 +256,8 @@ public class BST {
         tree.insert(7);
         tree.print(tree.root);
 
+        tree.deleteNode(tree.root, 16);
+        tree.print(tree.root);
 
     }
 }
