@@ -160,44 +160,6 @@ public class BST {
     }
     ///////////////////////////////////
 
-    public void remove(int value) {
-        if(root == null) {
-            return;
-        }
-
-        // search for value
-        Node parentNode = null;
-        Node currentNode = root;
-
-        while (currentNode.getValue() != value) {
-            if (value < currentNode.getValue()) {
-                parentNode = currentNode; // keep track of parent node
-                currentNode = currentNode.getLeft(); // go down one level
-
-            } else if (value > currentNode.getValue()) {
-                parentNode = currentNode; // keep track of parent node
-                currentNode = currentNode.getRight(); // go down one level
-            }
-        }
-
-        while (currentNode != null) {
-            if(currentNode.getLeft() == null && currentNode.getRight() == null) { // if the value is a leaf node, delete leaf value
-                currentNode = null;
-            } else if(currentNode.getLeft() != null) { // if the value has 1 child bypass the value
-                if (currentNode.getLeft() == null) {
-
-
-                }
-
-            } else { // else replace value with successor node
-
-                // coded myself into a corner!
-
-            }
-
-        }
-    }
-
     ////////////////////////////////////////
     // Adapted from: @author Shivani Dwivedi
     public Node deleteNode(Node root, int key) {
@@ -238,6 +200,7 @@ public class BST {
         }
         return root.getValue();
     }
+    /////////////////////////////////////////
 
     public static void main(String[] args) {
         BST tree = new BST();
