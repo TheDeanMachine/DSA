@@ -175,16 +175,17 @@ public class BST {
             if (root.getLeft() == null && root.getRight() == null) { // its a leaf node
                 root = null;
             } else if (root.getRight() != null) { // has a right child
-                root.setValue(successor(root)); // my worthy successor
+                root.setValue(successor(root)); // get successor
                 root.setRight(deleteNode(root.getRight(), root.getValue()));
             } else {
-                root.setValue(predecessor(root));
+                root.setValue(predecessor(root)); // get predecessor
                 root.setLeft(deleteNode(root.getLeft(), root.getValue()));
             }
         }
         return root;
     }
 
+    // If a node has a right subtree, the node's successor is that right subtree's leftmost child
     private int successor(Node root){
         root = root.getRight();
         while(root.getLeft() != null){
@@ -193,6 +194,7 @@ public class BST {
         return root.getValue();
     }
 
+    // its predecessor is the maximum value in its left subtree
     private int predecessor(Node root){
         root = root.getLeft();
         while(root.getRight() != null){
@@ -210,7 +212,9 @@ public class BST {
         tree.insert(3);
         tree.insert(6);
         tree.insert(15);
-        tree.insert(170);
+        tree.insert(70);
+        tree.insert(95);
+        tree.insert(59);
         tree.insert(14);
         tree.insert(16);
         tree.insert(1);
@@ -218,8 +222,8 @@ public class BST {
         tree.insert(5);
         tree.insert(7);
         tree.print(tree.root);
-
-        tree.deleteNode(tree.root, 16);
+        System.out.println();
+        tree.deleteNode(tree.root, 20);
         tree.print(tree.root);
 
     }
