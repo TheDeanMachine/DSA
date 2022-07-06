@@ -9,7 +9,7 @@ public class Factorial {
         }
         long temp = number * findFactorialRecursively(number - 1); // recursive case
         System.out.println(number + "! is: " + temp);
-        return temp;
+        return temp; // multiplication happens after the base case, as the call stack is popped off one by one
     }
 
 
