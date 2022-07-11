@@ -1,9 +1,6 @@
 package DataStructures.Trees;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class BST {
 
@@ -206,7 +203,8 @@ public class BST {
     }
     /////////////////////////////////////////
 
-    // BFS/DFS case usage
+
+    /// BFS/DFS case usage ///
 
     //If you know a solution is not far from the root of the tree:
     //BFS
@@ -247,6 +245,22 @@ public class BST {
         return list;
     }
 
+    public List<Integer> breathFirstSearchRecursively(Queue<Node> queue, List<Integer> list) {
+        if (!queue.isEmpty()) {
+            return list;
+        }
+
+        Node currentNode = queue.poll();
+
+        if(currentNode.getLeft() != null) {
+            queue.add(currentNode.getLeft());
+        }
+        if(currentNode.getRight() != null) {
+            queue.add(currentNode.getRight());
+        }
+
+        return breathFirstSearchRecursively(queue, list);
+    }
 
 
 
@@ -271,9 +285,17 @@ public class BST {
         System.out.println();
         tree.deleteNode(tree.root, 20);
         tree.print(tree.root);
+        System.out.println();
 
-        tree.breathFirstSearchIteratively().forEach(System.out::println);
+        System.out.println("BFS Traversal Iteratively");
+        tree.breathFirstSearchIteratively().forEach(x -> System.out.print(x + " -> "));
+        System.out.println();
 
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(tree.root);
+        tree.breathFirstSearchRecursively(queue, null);
+        System.out.println("BFS Traversal Recursively");
+        tree.breathFirstSearchIteratively().forEach(x -> System.out.print(x + " -> "));
 
     }
 }
