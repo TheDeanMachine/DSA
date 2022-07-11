@@ -1,7 +1,9 @@
 package DataStructures.Trees;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class BST {
 
@@ -204,6 +206,50 @@ public class BST {
     }
     /////////////////////////////////////////
 
+    // BFS/DFS case usage
+
+    //If you know a solution is not far from the root of the tree:
+    //BFS
+
+    //If the tree is very deep and solutions are rare,
+    //BFS (DFS will take long time)
+
+    //If the tree is very wide:
+    //DFS (BFS will need too much memory)
+
+    //If solutions are frequent but located deep in the tree
+    //DFS
+
+    //determining whether a path exists between two nodes
+    //DFS
+
+    //Finding the shortest path
+    //BFS
+
+
+    public List<Integer> breathFirstSearchIteratively() {
+        Node currentNode = root;
+        List<Integer> list = new ArrayList<>();  // store the route traversed
+        Queue<Node> queue = new LinkedList<>();  // used to keep track of parent nodes while visiting child nodes
+        queue.add(currentNode);
+
+        while (!queue.isEmpty()) {
+            currentNode = queue.poll();         // remove it from the queue
+            list.add(currentNode.getValue());   // add it to the list
+
+            if(currentNode.getLeft() != null) {
+                queue.add(currentNode.getLeft());
+            }
+            if(currentNode.getRight() != null) {
+                queue.add(currentNode.getRight());
+            }
+        }
+        return list;
+    }
+
+
+
+
     public static void main(String[] args) {
         BST tree = new BST();
         tree.insert(10);
@@ -225,6 +271,9 @@ public class BST {
         System.out.println();
         tree.deleteNode(tree.root, 20);
         tree.print(tree.root);
+
+        tree.breathFirstSearchIteratively().forEach(System.out::println);
+
 
     }
 }
