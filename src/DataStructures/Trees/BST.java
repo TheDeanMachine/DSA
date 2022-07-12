@@ -204,7 +204,7 @@ public class BST {
     /////////////////////////////////////////
 
 
-    /// BFS/DFS case usage ///
+    /// BFS/DFS case usage //////////////////////////////////////
 
     //If you know a solution is not far from the root of the tree:
     //BFS
@@ -225,6 +225,7 @@ public class BST {
     //BFS
 
 
+    // BFS
     public List<Integer> breathFirstSearchIteratively() {
         Node currentNode = root;
         List<Integer> list = new ArrayList<>();  // store the route traversed
@@ -245,11 +246,11 @@ public class BST {
         return list;
     }
 
+    // BFS
     public List<Integer> breathFirstSearchRecursively(Queue<Node> queue, List<Integer> list) {
         if (!queue.isEmpty()) {
             return list;
         }
-
         Node currentNode = queue.poll();
 
         if(currentNode.getLeft() != null) {
@@ -263,6 +264,44 @@ public class BST {
     }
 
 
+    // DFS
+    public List<Integer> depthFirstSearchInOrder() {
+        return traverseInOrder(root, new ArrayList<>());
+    }
+
+    private List<Integer> traverseInOrder(Node node, ArrayList<Integer> list) {
+        if (node.getLeft() != null) {
+            traverseInOrder(node.getLeft(), list); // go all the way down to left
+        }
+        list.add(node.getValue());
+
+        if (node.getRight() != null) {
+            traverseInOrder(node.getRight(), list);
+        }
+        return list;
+    }
+
+    // DFS
+    public List<Integer> depthFirstSearchPostOrder() {
+        return traversePostOrder(root, new ArrayList<>());
+    }
+
+    private List<Integer> traversePostOrder(Node root, ArrayList<Integer> list) {
+
+
+        return null;
+    }
+
+    // DFS
+    public List<Integer> depthFirstSearchPrenOrder() {
+        return traversePreOrder(root, new ArrayList<>());
+    }
+
+    private List<Integer> traversePreOrder(Node root, ArrayList<Integer> list) {
+
+
+        return null;
+    }
 
     public static void main(String[] args) {
         BST tree = new BST();
@@ -296,6 +335,9 @@ public class BST {
         tree.breathFirstSearchRecursively(queue, null);
         System.out.println("BFS Traversal Recursively");
         tree.breathFirstSearchIteratively().forEach(x -> System.out.print(x + " -> "));
+        System.out.println();
 
+        System.out.println("DFS Traversal InOrder");
+        tree.depthFirstSearchInOrder().forEach(x -> System.out.print(x + " -> "));
     }
 }
