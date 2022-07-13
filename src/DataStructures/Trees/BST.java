@@ -247,11 +247,19 @@ public class BST {
     }
 
     // BFS
-    public List<Integer> breathFirstSearchRecursively(Queue<Node> queue, List<Integer> list) {
-        if (!queue.isEmpty()) {
+    public List<Integer> breathFirstSearchRecursively() { // set up for recursion
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+//        List<Integer> list = new ArrayList<>(); // store the route traversed
+        return breathFirstSearch(queue, new ArrayList<>());
+    }
+
+    public List<Integer> breathFirstSearch(Queue<Node> queue, List<Integer> list) {
+        if (queue.isEmpty()) {
             return list;
         }
         Node currentNode = queue.poll();
+        list.add(currentNode.getValue());
 
         if(currentNode.getLeft() != null) {
             queue.add(currentNode.getLeft());
@@ -260,16 +268,15 @@ public class BST {
             queue.add(currentNode.getRight());
         }
 
-        return breathFirstSearchRecursively(queue, list);
+        return breathFirstSearch(queue, list);
     }
 
-
-    // DFS
+    // DFS InOrder
     public List<Integer> depthFirstSearchInOrder() {
         return traverseInOrder(root, new ArrayList<>());
     }
 
-    private List<Integer> traverseInOrder(Node node, ArrayList<Integer> list) {
+    private List<Integer> traverseInOrder(Node node, List<Integer> list) {
         if (node.getLeft() != null) {
             traverseInOrder(node.getLeft(), list); // go all the way down to left
         }
@@ -281,26 +288,38 @@ public class BST {
         return list;
     }
 
-    // DFS
+    // DFS PreOrder
+    public List<Integer> depthFirstSearchPreOrder() { // good for recreating a tree
+        return traversePreOrder(root, new ArrayList<>());
+    }
+
+    private List<Integer> traversePreOrder(Node node, List<Integer> list) {
+        list.add(node.getValue());
+
+        if (node.getLeft() != null) {
+            traversePreOrder(node.getLeft(), list);
+        }
+        if (node.getRight() != null) {
+            traversePreOrder(node.getRight(), list);
+        }
+        return list;
+    }
+
+    // DFS PostOrder
     public List<Integer> depthFirstSearchPostOrder() {
         return traversePostOrder(root, new ArrayList<>());
     }
 
-    private List<Integer> traversePostOrder(Node root, ArrayList<Integer> list) {
+    private List<Integer> traversePostOrder(Node node, List<Integer> list) {
+        if (node.getLeft() != null) {
+            traversePostOrder(node.getLeft(), list);
+        }
+        if (node.getRight() != null) {
+            traversePostOrder(node.getRight(), list);
+        }
+        list.add(node.getValue());
 
-
-        return null;
-    }
-
-    // DFS
-    public List<Integer> depthFirstSearchPrenOrder() {
-        return traversePreOrder(root, new ArrayList<>());
-    }
-
-    private List<Integer> traversePreOrder(Node root, ArrayList<Integer> list) {
-
-
-        return null;
+        return list;
     }
 
     public static void main(String[] args) {
@@ -322,6 +341,7 @@ public class BST {
         tree.insert(7);
         tree.print(tree.root);
         System.out.println();
+
         tree.deleteNode(tree.root, 20);
         tree.print(tree.root);
         System.out.println();
@@ -330,14 +350,20 @@ public class BST {
         tree.breathFirstSearchIteratively().forEach(x -> System.out.print(x + " -> "));
         System.out.println();
 
-        Queue<Node> queue = new LinkedList<>();
-        queue.add(tree.root);
-        tree.breathFirstSearchRecursively(queue, null);
         System.out.println("BFS Traversal Recursively");
-        tree.breathFirstSearchIteratively().forEach(x -> System.out.print(x + " -> "));
+        tree.breathFirstSearchRecursively().forEach(x -> System.out.print(x + " -> "));
         System.out.println();
 
         System.out.println("DFS Traversal InOrder");
         tree.depthFirstSearchInOrder().forEach(x -> System.out.print(x + " -> "));
+        System.out.println();
+
+        System.out.println("DFS Traversal PreOrder");
+        tree.depthFirstSearchPreOrder().forEach(x -> System.out.print(x + " -> "));
+        System.out.println();
+
+        System.out.println("DFS Traversal PostOrder");
+        tree.depthFirstSearchPostOrder().forEach(x -> System.out.print(x + " -> "));
+        System.out.println();
     }
 }
