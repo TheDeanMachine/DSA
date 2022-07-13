@@ -342,28 +342,28 @@ public class BST {
         tree.print(tree.root);
         System.out.println();
 
-        tree.deleteNode(tree.root, 20);
-        tree.print(tree.root);
-        System.out.println();
+//        tree.deleteNode(tree.root, 20);
+//        tree.print(tree.root);
+//        System.out.println();
 
         System.out.println("BFS Traversal Iteratively");
         tree.breathFirstSearchIteratively().forEach(x -> System.out.print(x + " -> "));
-        System.out.println();
+        System.out.println("\n");
 
         System.out.println("BFS Traversal Recursively");
         tree.breathFirstSearchRecursively().forEach(x -> System.out.print(x + " -> "));
-        System.out.println();
+        System.out.println("\n");
 
         System.out.println("DFS Traversal InOrder");
         tree.depthFirstSearchInOrder().forEach(x -> System.out.print(x + " -> "));
-        System.out.println();
+        System.out.println("\n");
 
         System.out.println("DFS Traversal PreOrder");
         tree.depthFirstSearchPreOrder().forEach(x -> System.out.print(x + " -> "));
-        System.out.println();
+        System.out.println("\n");
 
         System.out.println("DFS Traversal PostOrder");
         tree.depthFirstSearchPostOrder().forEach(x -> System.out.print(x + " -> "));
-        System.out.println();
+        System.out.println("\n");
     }
 }
