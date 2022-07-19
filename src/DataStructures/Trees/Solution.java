@@ -20,14 +20,14 @@ class TreeNode {
 }
 
 public class Solution {
-//    // non-working solution using inorder traversal
+//    // 60/80 testcases solution using inorder traversal
 //    private static Queue<Integer> queue = new LinkedList<>(); // used to hold and check against root value
 //
 //    public static boolean isValidBST(TreeNode root) {
 //        queue.add(root.val);
 //
 //        if(root.left != null) {
-//            if (root.val <= root.left.val || root.left.val < queue.peek()) { // check current node left child
+//            if (root.val <= root.left.val || root.left.val > queue.peek()) { // check current node left child
 //                return false; // not a valid tree
 //            }
 //
@@ -35,7 +35,7 @@ public class Solution {
 //        }
 //
 //        if (root.right != null) {
-//            if (root.val >= root.right.val || root.right.val > queue.peek()) {// check current node right child
+//            if (root.val >= root.right.val || root.right.val < queue.peek()) {// check current node right child
 //                return false; // not a valid tree
 //            }
 //
@@ -71,8 +71,8 @@ public class Solution {
     }
 
 
-    // Algorithm Using Upper and Lower Limits
-    public static boolean isValidBST(TreeNode root) {
+    // Algorithm Using Upper and Lower Limits // Most efficient
+    public static boolean isValidBST3(TreeNode root) {
         return isValid(root, null, null);
     }
 
@@ -86,19 +86,17 @@ public class Solution {
 
 
     public static void main(String[] args) {
-        //[5,4,6,null,null,3,7] // not valid BST
-//        TreeNode treeNode1 = new TreeNode(5);
-//        TreeNode treeNode2 = new TreeNode(4);
-//        TreeNode treeNode3 = new TreeNode(6);
-//        TreeNode treeNode4 = new TreeNode(3);
-//        TreeNode treeNode5 = new TreeNode(7);
-//        treeNode1.left = treeNode2;
-//        treeNode1.right = treeNode3;
-//        treeNode3.left = treeNode4;
-//        treeNode3.right = treeNode5;
+//        [5,4,6,null,null,3,7] // not valid BST
+        TreeNode treeNode1 = new TreeNode(5);
+        TreeNode treeNode2 = new TreeNode(4);
+        TreeNode treeNode3 = new TreeNode(6);
+        TreeNode treeNode4 = new TreeNode(3);
+        TreeNode treeNode5 = new TreeNode(7);
+        treeNode1.left = treeNode2;
+        treeNode1.right = treeNode3;
+        treeNode3.left = treeNode4;
+        treeNode3.right = treeNode5;
 
-        //[2,1,3]
-        TreeNode treeNode1 = new TreeNode(2, new TreeNode(1), new TreeNode(3));
-        System.out.println(isValidBST2(treeNode1));
+        System.out.println(isValidBST3(treeNode1));
     }
 }
