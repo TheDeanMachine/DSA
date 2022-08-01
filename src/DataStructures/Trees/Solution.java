@@ -46,7 +46,7 @@ public class Solution {
 //    }
 
 
-    // Algorithm Using Inorder Traversal and storing the results in a List
+    // Algorithm Using Inorder Traversal and storing the results in a List, and checking the list to see if its sorted
     public static boolean isValidBST2(TreeNode root) {
         List<Integer> list = inOrder(root, new ArrayList<>());
         return isSorted(list);
