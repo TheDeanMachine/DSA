@@ -4,82 +4,78 @@ package Algorithms.Sorting;
 // and one for maintaining the current index of the final sorted array.
 public class MergeSort {
     void merge(int[] arr, int startIndex, int middleIndex, int endIndex) {
+        // Maintain current index of sub-arrays and main array
+        int x = 0;
+        int y = 0;
+        int currentIndex = startIndex;
 
-        // Create leftArray ← A[startIndex..middleIndex] and rightArray ← A[middleIndex+1..endIndex]
+        // Create array sizes based on array passed in
         int leftArraySize = middleIndex - startIndex + 1;
         int rightArraySize = endIndex - middleIndex;
 
+        // Create left and right arrays based on those sizes
         int[] leftArray = new int[leftArraySize];
         int[] rightArray = new int[rightArraySize];
 
-        for (int i = 0; i < leftArraySize; i++)
-            leftArray[i] = arr[startIndex + i];
+        // copy the elements from the main array into the sub-arrays
+        System.arraycopy(arr, startIndex, leftArray, 0, leftArraySize);
+        System.arraycopy(arr, middleIndex + 1, rightArray, 0, rightArraySize);
 
-        for (int j = 0; j < rightArraySize; j++)
-            rightArray[j] = arr[middleIndex + 1 + j];
 
-        // Maintain current index of sub-arrays and main array
-        int i = 0;
-        int j = 0;
-        int k = startIndex;
-
-        // Until we reach the END of either leftArray or rightArray, pick larger among
-        // elements leftArray and rightArray and place them in the correct position at A[startIndex..endIndex]
-        while (i < leftArraySize && j < rightArraySize) {
-            if (leftArray[i] <= rightArray[j]) {
-                arr[k] = leftArray[i];
-                i++;
+        // Until we reach the END of either leftArray or rightArray, pick the largest among
+        // elements of leftArray and rightArray and place them in the correct position at A[startIndex..endIndex]
+        while (x < leftArraySize && y < rightArraySize) { // Have we reached the end of the arrays?
+            if (leftArray[x] <= rightArray[y]) {   // Compare current elements of both arrays
+                arr[currentIndex] = leftArray[x];  // Copy smaller element into sorted array
+                x++;                               // Move pointer of element containing smaller element
             } else {
-                arr[k] = rightArray[j];
-                j++;
+                arr[currentIndex] = rightArray[y]; // Copy smaller element into sorted array
+                y++;                               // Move pointer of element containing smaller element
             }
-            k++;
+            currentIndex++;
         }
 
         // When we run out of elements in either leftArray or rightArray,
-        // pick up the remaining elements and put in A[startIndex..endIndex]
-        while (i < leftArraySize) {
-            arr[k] = leftArray[i];
-            i++;
-            k++;
+        // copy the remaining elements into the main array
+        while (x < leftArraySize) {
+            arr[currentIndex] = leftArray[x];
+            x++;
+            currentIndex++;
         }
 
-        while (j < rightArraySize) {
-            arr[k] = rightArray[j];
-            j++;
-            k++;
+        while (y < rightArraySize) {
+            arr[currentIndex] = rightArray[y];
+            y++;
+            currentIndex++;
         }
     }
 
     // Divide the array into two subarrays, sort them and merge them
-    void mergeSort(int arr[], int l, int r) {
-        if (l < r) {
+    void mergeSort(int[] arr, int start, int end) {
+        if (start < end) {
 
             // middlePoint is the point where the array is divided into two subarrays
-            int middlePoint = (l + r) / 2;
+            int middlePoint = (start + end) / 2;
 
-            mergeSort(arr, l, middlePoint);
-            mergeSort(arr, middlePoint + 1, r);
+            mergeSort(arr, start, middlePoint);
+            mergeSort(arr, middlePoint + 1, end);
 
             // Merge the sorted subarrays
-            merge(arr, l, middlePoint, r);
+            merge(arr, start, middlePoint, end);
         }
     }
 
     // Print the array
-    static void printArray(int arr[]) {
-        int n = arr.length;
-        for (int i = 0; i < n; ++i)
-            System.out.print(arr[i] + " ");
-        System.out.println();
+    static void printArray(int[] arr) {
+        for (int num : arr) System.out.print(num + " ");
     }
 
     // Driver program
-    public static void main(String args[]) {
-        int arr[] = { 6, 5, 12, 10, 9, 1 };
+    public static void main(String[] args) {
+        int[] arr = { 6, 5, 12, 10, 9, 1 };
 
-        MergeSort ob = new MergeSort();
-        ob.mergeSort(arr, 0, arr.length - 1);
+        MergeSort sort = new MergeSort();
+        sort.mergeSort(arr, 0, arr.length - 1);
 
         System.out.println("Sorted array:");
         printArray(arr);
