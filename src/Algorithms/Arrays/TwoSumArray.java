@@ -30,5 +30,7 @@ public class TwoSumArray {
 
     public static void main(String[] args) {
         System.out.println(Arrays.toString(twoSum(new int[]{1, 2, 3, 4, 5, 6, 7}, 9)));
+        System.out.println(Arrays.toString(twoNumberSum(new int[]{1, 2, 3, 4, 5, 6, 7}, 9)));
+
     }
 }
